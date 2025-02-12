@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:45:39 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 16:49:58 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/12 16:59:41 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_fractal
 	t_complex	min;
 	t_complex	max;
 	int			max_iter;
+	double		zoom;
 	int			(*func)(t_complex, int);
 }	t_fractal;
 
@@ -49,7 +50,11 @@ void		init_mlx(t_fractal *fractal);
 void		init_fractal(t_fractal *f);
 void		clean_exit(t_fractal *f, char *msg, int exit_code);
 
+// Event handlers
+
 int			key_hook(int keycode, t_fractal *f);
+int			mouse_hook(int mouse_code, int x, int y, t_fractal *f);
+
 // Rendering function
 
 void		render_fractal(t_fractal *f);

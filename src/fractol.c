@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 17:59:25 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 16:47:00 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/12 17:05:36 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(void)
 	init_fractal(&fractal);
 	fractal.func = mandelbrot;
 	mlx_key_hook(fractal.window, key_hook, &fractal);
-	// mlx_mouse_hook(fractal.window, mouse_hook, &fractal);
+	mlx_mouse_hook(fractal.window, mouse_hook, &fractal);
 	mlx_hook(fractal.window, CLOSE_BUTTON, 0, exit_fractal, &fractal);
 	render_fractal(&fractal);
 	mlx_loop(fractal.mlx);

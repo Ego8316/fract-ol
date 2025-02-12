@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:54:50 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 16:50:13 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/12 17:49:20 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void	translation(t_fractal *f, char d)
  * 	- S: moves the fractal down.
  * 	- A: moves the fractal left.
  * 	- D: moves the fractal right.
- * 	- UP: moves the fractal up.
- * 	- DOWN: moves the fractal down.
- * 	- LEFT: moves the fractal left.
- * 	- RIGHT: moves the fractal right.
- * 	- R: resets the fractal to default values.
+ * 	- UP: moves the fractal view up.
+ * 	- DOWN: moves the fractal view down.
+ * 	- LEFT: moves the fractal view left.
+ * 	- RIGHT: moves the fractal view right.
+ * 	- R: resets the fractal view.
  * 	- PLUS: raises the number of max iterations.
  * 	- MINUS: decreases the number of max iterations.
  * Rerenders the fractal afterwards.
@@ -93,11 +93,62 @@ int	key_hook(int keycode, t_fractal *f)
 }
 
 /**
- * @brief	Links mouse codes to events.
- * 	- 
+ * @brief Converts the mouse position into complex coordinates
+ * to compute the new center, height and width of the view.
+ * Updates the ranges of the view accordingly and updates the
+ * view's zoom of the fractal structure. If the zoom is already
+ * below one, only updates it if the ratio is greater than one
+ * and does not change the view to avoid zooming out purposelessly.
+ * 
+ * @param f Pointer to the fractal structure.
+ * @param x Mouse x coordinate.
+ * @param y Mouse y coordinate.
+ * @param ratio Zoom ratio. If greater than one, zooms in.
+ * Zooms out otherwise.
  */
-// int	mouse_hook(int mouse_code, int x, int y, t_fractal *f)
-// {
+void	zoom(t_fractal *f, int x, int y, double ratio)
+{
+	double		new_width;
+	double		new_height;
+	t_complex	new_center;
 
-// 	return (0);
-// }
+	if (f->zoom >= 1.0)
+	{
+		new_width = f->max.x - f->min.x;
+		new_height = f->max.y - f->min.y;
+		new_center.x = f->min.x + (double)x * (f->max.x - f->min.x) / WIDTH;
+		new_center.y = f->min.y + (double)y * (f->max.y - f->min.y) / HEIGHT;
+		f->min.x = new_center.x - new_width / (2 * ratio);
+		f->max.x = new_center.x + new_width / (2 * ratio);
+		f->min.y = new_center.y - new_height / (2 * ratio);
+		f->max.y = new_center.y + new_height / (2 * ratio);
+		f->zoom *= ratio;
+	}
+	if (f->zoom < 1 && ratio > 1)
+	{
+		f->zoom = 1.0;
+		zoom(f, x, y, ratio);
+	}
+}
+
+/**
+ * @brief	Links mouse codes to events.
+ * 	- MOUSE_WHEEL_UP: zooms in.
+ * 	- MOUSE_WHEEL_DOWN: zooms out.
+ * 
+ * @param mouse_code Mouse code corresponding to the action.
+ * @param x Mouse x coordinate.
+ * @param y Mouse y coordinate.
+ * @param f Pointer to the fractal structure.
+ * 
+ * @return 0.
+ */
+int	mouse_hook(int mouse_code, int x, int y, t_fractal *f)
+{
+	if (mouse_code == MOUSE_WHEEL_UP)
+		zoom(f, x, y, 1.2);
+	if (mouse_code == MOUSE_WHEEL_DOWN)
+		zoom(f, x, y, 0.7);
+	render_fractal(f);
+	return (0);
+}
