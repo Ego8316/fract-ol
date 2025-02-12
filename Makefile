@@ -6,19 +6,21 @@
 #    By: ego <ego@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/15 12:42:34 by hcavet            #+#    #+#              #
-#    Updated: 2025/02/11 18:29:05 by ego              ###   ########.fr        #
+#    Updated: 2025/02/12 14:15:01 by ego              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 IDIR	=	include/
 SDIR	=	src/
 
-SRC		=	fractol.c	\
-			init.c		\
-			utils.c		\
-			events.c	\
-			julia.c		\
-			mandelbrot.c
+SRC		=	fractol.c				\
+			init.c					\
+			utils.c					\
+			events.c				\
+			fractals/julia.c		\
+			fractals/mandelbrot.c	\
+			display.c				\
+			render.c
 SRCS	=	$(addprefix $(SDIR), $(SRC))
 OBJS	=	$(SRCS:.c=.o)
 
