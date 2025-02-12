@@ -6,7 +6,7 @@
 #    By: ego <ego@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/15 12:42:34 by hcavet            #+#    #+#              #
-#    Updated: 2025/02/12 14:15:01 by ego              ###   ########.fr        #
+#    Updated: 2025/02/12 14:18:54 by ego              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC		=	fractol.c				\
 			fractals/julia.c		\
 			fractals/mandelbrot.c	\
 			display.c				\
-			render.c
+			render.c				\
+			color.c
 SRCS	=	$(addprefix $(SDIR), $(SRC))
 OBJS	=	$(SRCS:.c=.o)
 
