@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:55:28 by ego               #+#    #+#             */
-/*   Updated: 2025/02/11 20:29:29 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/12 15:02:38 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,9 @@ void	init_fractal(t_fractal *f)
 		clean_exit(f, "MLX: image creation failed.\n", 1);
 	f->addr = mlx_get_data_addr(f->image, &f->bits_per_pixel,
 			&f->size_line, &f->endian);
+	f->func = mandelbrot;
+	f->min.x = -2.0;
+	f->min.y = -1.5;
+	f->max.x = 1.0;
+	f->max.y = 1.5;
 }

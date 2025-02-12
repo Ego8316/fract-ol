@@ -6,7 +6,7 @@
 #    By: ego <ego@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/15 12:42:34 by hcavet            #+#    #+#              #
-#    Updated: 2025/02/12 14:18:54 by ego              ###   ########.fr        #
+#    Updated: 2025/02/12 14:49:47 by ego              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ SRC		=	fractol.c				\
 			init.c					\
 			utils.c					\
 			events.c				\
-			fractals/julia.c		\
-			fractals/mandelbrot.c	\
+			fractals.c				\
+			complex.c				\
 			display.c				\
 			render.c				\
 			color.c

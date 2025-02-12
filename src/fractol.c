@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 17:59:25 by ego               #+#    #+#             */
-/*   Updated: 2025/02/11 20:32:03 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/12 15:07:01 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ int	main(void)
 	t_fractal	fractal;
 
 	init_fractal(&fractal);
-	pixel_put(&fractal, 5, 5, 0x00FF0000);
-	mlx_put_image_to_window(fractal.mlx, fractal.window, fractal.image, 0, 0);
-	mlx_loop(fractal.mlx);
+	render_fractal(&fractal);
 	return (0);
 }
