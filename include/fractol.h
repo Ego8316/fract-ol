@@ -6,12 +6,11 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:45:39 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 15:08:08 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/12 16:49:58 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
-
 # define FRACTOL_H
 
 # include <../minilibx/mlx.h>
@@ -24,7 +23,6 @@
 # define WIDTH 900
 # define HEIGHT 900
 # define TITLE "fract-ol"
-# define MAX_ITER 100
 
 typedef struct s_complex
 {
@@ -38,16 +36,27 @@ typedef struct s_fractal
 	void		*window;
 	void		*image;
 	void		*addr;
-	int			bits_per_pixel;
+	int			bpp;
 	int			size_line;
 	int			endian;
 	t_complex	min;
 	t_complex	max;
-	int			(*func)(t_complex);
+	int			max_iter;
+	int			(*func)(t_complex, int);
 }	t_fractal;
 
-void		init_fractal(t_fractal *fractal);
+void		init_mlx(t_fractal *fractal);
+void		init_fractal(t_fractal *f);
 void		clean_exit(t_fractal *f, char *msg, int exit_code);
+
+int			key_hook(int keycode, t_fractal *f);
+// Rendering function
+
+void		render_fractal(t_fractal *f);
+
+// Fractal sets
+
+int			mandelbrot(t_complex c, int max_iterations);
 
 // Complex operations
 
@@ -56,10 +65,7 @@ t_complex	addition(t_complex z1, t_complex z2);
 t_complex	substraction(t_complex z1, t_complex z2);
 t_complex	multiplication(t_complex z1, t_complex z2);
 
-// Fractal sets
-
-int			mandelbrot(t_complex c);
-void		render_fractal(t_fractal *f);
+// Display functions
 
 void		ft_putstr_fd(const char *s, int fd);
 

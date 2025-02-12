@@ -6,20 +6,35 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:55:28 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 15:02:38 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/12 16:47:27 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 /**
- * @brief Initializes a fractal structure.
+ * @brief Sets the fractal structure to
+ * default values.
+ * 
+ * @param f Pointer to the fractal structure.
+ */
+void	init_fractal(t_fractal *f)
+{
+	f->min.x = -2.0;
+	f->min.y = -1.5;
+	f->max.x = 1.0;
+	f->max.y = 1.5;
+	f->max_iterations = 80;
+}
+
+/**
+ * @brief Initializes the fractal structure.
  * First connects to mlx, then creates a new
  * window and and a new image.
  * 
  * @param f Pointer to an empty fractal structure.
  */
-void	init_fractal(t_fractal *f)
+void	init_mlx(t_fractal *f)
 {
 	f->mlx = mlx_init();
 	if (!f->mlx)
@@ -30,11 +45,6 @@ void	init_fractal(t_fractal *f)
 	f->image = mlx_new_image(f->mlx, WIDTH, HEIGHT);
 	if (!f->image)
 		clean_exit(f, "MLX: image creation failed.\n", 1);
-	f->addr = mlx_get_data_addr(f->image, &f->bits_per_pixel,
+	f->addr = mlx_get_data_addr(f->image, &f->bpp,
 			&f->size_line, &f->endian);
-	f->func = mandelbrot;
-	f->min.x = -2.0;
-	f->min.y = -1.5;
-	f->max.x = 1.0;
-	f->max.y = 1.5;
 }

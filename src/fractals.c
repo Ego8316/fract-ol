@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:54:32 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 14:52:35 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/12 16:28:14 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * 
  * @return Number of iterations before divergence (or max if it converges).
  */
-int	mandelbrot(t_complex c)
+int	mandelbrot(t_complex c, int max_iterations)
 {
 	t_complex	z;
 	int			iter;
@@ -27,7 +27,7 @@ int	mandelbrot(t_complex c)
 	z.x = 0;
 	z.y = 0;
 	iter = 0;
-	while (modulus_squared(z) <= 4.0 && iter < MAX_ITER)
+	while (modulus_squared(z) <= 4.0 && iter < max_iterations)
 	{
 		z = addition(multiplication(z, z), c);
 		iter++;
