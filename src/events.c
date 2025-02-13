@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:54:50 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 17:49:20 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/12 19:06:17 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,71 @@
  * @param dir Direction: 'U' for up, 'D' for down,
  * 'L' for left and 'R' for right.
  */
-void	translation(t_fractal *f, char d)
+static void	translation(t_fractal *f, char d)
 {
-	double	modifier;
+	double	shift;
 
-	modifier = 0.05;
+	shift = 0.1 / f->zoom;
 	if (d == 'U')
 	{
-		f->min.y -= modifier;
-		f->max.y -= modifier;
+		f->min.y -= shift;
+		f->max.y -= shift;
 	}
 	else if (d == 'D')
 	{
-		f->min.y += modifier;
-		f->max.y += modifier;
+		f->min.y += shift;
+		f->max.y += shift;
 	}
 	else if (d == 'R')
 	{
-		f->min.x += modifier;
-		f->max.x += modifier;
+		f->min.x += shift;
+		f->max.x += shift;
 	}
 	else if (d == 'L')
 	{
-		f->min.x -= modifier;
-		f->max.x -= modifier;
+		f->min.x -= shift;
+		f->max.x -= shift;
 	}
 	return ;
+}
+
+/**
+ * @brief Converts the mouse position into complex coordinates
+ * to compute the new center, height and width of the view.
+ * Updates the ranges of the view accordingly and updates the
+ * view's zoom of the fractal structure. If the zoom is already
+ * below one, only updates it if the ratio is greater than one
+ * and does not change the view to avoid zooming out purposelessly.
+ * 
+ * @param f Pointer to the fractal structure.
+ * @param x Mouse x coordinate.
+ * @param y Mouse y coordinate.
+ * @param ratio Zoom ratio. If greater than one, zooms in.
+ * Zooms out otherwise.
+ */
+static void	zoom(t_fractal *f, int x, int y, double ratio)
+{
+	double		new_width;
+	double		new_height;
+	t_complex	new_center;
+
+	if (f->zoom >= 1.0)
+	{
+		new_width = f->max.x - f->min.x;
+		new_height = f->max.y - f->min.y;
+		new_center.x = f->min.x + (double)x * (f->max.x - f->min.x) / WIDTH;
+		new_center.y = f->min.y + (double)y * (f->max.y - f->min.y) / HEIGHT;
+		f->min.x = new_center.x - new_width / (2 * ratio);
+		f->max.x = new_center.x + new_width / (2 * ratio);
+		f->min.y = new_center.y - new_height / (2 * ratio);
+		f->max.y = new_center.y + new_height / (2 * ratio);
+		f->zoom *= ratio;
+	}
+	if (f->zoom < 1 && ratio > 1)
+	{
+		f->zoom = 1.0;
+		zoom(f, x, y, ratio);
+	}
 }
 
 /**
@@ -90,45 +129,6 @@ int	key_hook(int keycode, t_fractal *f)
 		f->max_iter -= 5;
 	render_fractal(f);
 	return (0);
-}
-
-/**
- * @brief Converts the mouse position into complex coordinates
- * to compute the new center, height and width of the view.
- * Updates the ranges of the view accordingly and updates the
- * view's zoom of the fractal structure. If the zoom is already
- * below one, only updates it if the ratio is greater than one
- * and does not change the view to avoid zooming out purposelessly.
- * 
- * @param f Pointer to the fractal structure.
- * @param x Mouse x coordinate.
- * @param y Mouse y coordinate.
- * @param ratio Zoom ratio. If greater than one, zooms in.
- * Zooms out otherwise.
- */
-void	zoom(t_fractal *f, int x, int y, double ratio)
-{
-	double		new_width;
-	double		new_height;
-	t_complex	new_center;
-
-	if (f->zoom >= 1.0)
-	{
-		new_width = f->max.x - f->min.x;
-		new_height = f->max.y - f->min.y;
-		new_center.x = f->min.x + (double)x * (f->max.x - f->min.x) / WIDTH;
-		new_center.y = f->min.y + (double)y * (f->max.y - f->min.y) / HEIGHT;
-		f->min.x = new_center.x - new_width / (2 * ratio);
-		f->max.x = new_center.x + new_width / (2 * ratio);
-		f->min.y = new_center.y - new_height / (2 * ratio);
-		f->max.y = new_center.y + new_height / (2 * ratio);
-		f->zoom *= ratio;
-	}
-	if (f->zoom < 1 && ratio > 1)
-	{
-		f->zoom = 1.0;
-		zoom(f, x, y, ratio);
-	}
 }
 
 /**

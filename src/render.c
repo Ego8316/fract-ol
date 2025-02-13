@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:14:27 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 17:25:33 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/12 19:01:19 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	render_fractal(t_fractal *f)
 		{
 			c.x = f->min.x + (double)x * (f->max.x - f->min.x) / WIDTH;
 			c.y = f->min.y + (double)y * (f->max.y - f->min.y) / HEIGHT;
-			iter = f->func(c, f->max_iter);
+			iter = f->func(c, f);
 			color = get_color(iter, f->max_iter);
 			put_color_to_pixel(f, x, y, color);
 			x++;

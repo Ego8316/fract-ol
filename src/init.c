@@ -6,11 +6,29 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:55:28 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 16:57:21 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/12 19:20:18 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+void	set_default_range(t_fractal *f)
+{
+	if (f->set == JULIA)
+	{
+		f->min.x = -2.0;
+		f->min.y = -2.0;
+		f->max.x = 2.0;
+		f->max.y = 2.0;
+	}
+	if (f->set == MANDELBROT)
+	{
+		f->min.x = -2.0;
+		f->min.y = -1.5;
+		f->max.x = 1.0;
+		f->max.y = 1.5;
+	}
+}
 
 /**
  * @brief Sets the fractal structure to
@@ -26,6 +44,8 @@ void	init_fractal(t_fractal *f)
 	f->max.y = 1.5;
 	f->max_iter = 80;
 	f->zoom = 1.0;
+	f->c.x = -0.745429;
+	f->c.y = 0.05;
 }
 
 /**
