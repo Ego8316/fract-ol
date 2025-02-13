@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 23:10:59 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 19:25:32 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/13 19:40:55 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ void	ft_putstr_fd(const char *s, int fd)
 	return ;
 }
 
+int	put_help_message(void)
+{
+	ft_putstr_fd("Usage:\t./fractol mandelbrot\n", STDOUT_FILENO);
+	return (0);
+}
 // int	put_help_message(void)
 // {
 // 	ft_putstr_fd(HELP1, STDERR_FILENO);

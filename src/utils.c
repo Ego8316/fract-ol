@@ -6,36 +6,63 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:55:46 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 19:07:20 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/13 20:24:28 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 /**
- * @brief Compares the first n bytes of the two strings s1 and s2.
+ * @brief Compares the two strings s1 and s2.
  * 
  * @param s1 Pointer to the first string.
  * @param s2 Pointer to the second string.
- * @param n The number of bytes to compare.
  * 
- * @return - 0 if the first n bytes of both strings are equal,
- * a signed value otherwise.
+ * @return - 0 if both strings are equal, 1 otherwise.
  */
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int		diff;
 	size_t	i;
 
 	i = 0;
-	while ((s1[i] || s2[i]) && i < n)
+	while (s1[i] || s2[i])
 	{
 		diff = (unsigned char)s1[i] - (unsigned char)s2[i];
 		if (diff)
-			return (diff);
+			return (1);
 		i++;
 	}
 	return (0);
+}
+
+/**
+ * @brief Compares the string s to the three other strings.
+ * 
+ * @param s1 Pointer to the first string.
+ * @param s2 Pointer to the second string.
+ * @param s3 Pointer to the third string.
+ * @param s Pointer to the string to be compared with others.
+ * 
+ * @return - 0 if the string s is not equal to any of the others, 1 otherwise.
+ */
+int	ft_strscmp(char *s1, char *s2, char *s3, char *s)
+{
+	return (ft_strcmp(s1, s) & ft_strcmp(s2, s) & ft_strcmp(s3, s));
+}
+
+/**
+ * @brief Computes the absolute value of a double.
+ * 
+ * @param x Number whose absolute value is to be computed.
+ * 
+ * @return The absolute value.
+ */
+double	ft_abs(double x)
+{
+	if (x < 0)
+		return (-x);
+	return (x);
 }
 
 /**

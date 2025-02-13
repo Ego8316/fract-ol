@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:45:39 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 19:43:10 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/13 20:32:08 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@
 # define MANDELBROT 1
 # define BURNING_SHIP 2
 # define NEWTON 3
-# define J "julia"
-# define M "mandelbrot"
-# define B "burning_ship"
-# define N "newton"
 
 typedef struct s_complex
 {
@@ -58,8 +54,9 @@ typedef struct s_fractal
 
 // Initialization
 
-void		init_mlx(t_fractal *fractal);
+int			init_set(int ac, char **av, t_fractal *f, char set);
 void		init_fractal(t_fractal *f);
+void		init_mlx(t_fractal *fractal);
 
 // Event handlers
 
@@ -72,23 +69,27 @@ void		render_fractal(t_fractal *f);
 
 // Fractal sets
 
-int			mandelbrot(t_complex c, t_fractal *f);
 int			julia(t_complex z, t_fractal *f);
+int			mandelbrot(t_complex c, t_fractal *f);
+int			burning_ship(t_complex c, t_fractal *f);
+int			newton(t_complex z, t_fractal *f);
 
 // Complex operations
 
 double		modulus_squared(t_complex z);
 t_complex	addition(t_complex z1, t_complex z2);
-t_complex	substraction(t_complex z1, t_complex z2);
 t_complex	multiplication(t_complex z1, t_complex z2);
 
 // Utils
 
-int			ft_strncmp(const char *s1, const char *s2, size_t n);
+int			ft_strcmp(char *s1, char *s2);
+int			ft_strscmp(char *s1, char *s2, char *s3, char *s);
+double		ft_abs(double x);
 void		clean_exit(t_fractal *f, char *msg, int exit_code);
 
 // Display functions
 
 void		ft_putstr_fd(const char *s, int fd);
+int			put_help_message(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 14:35:23 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 14:47:20 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/13 20:23:28 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,23 +39,6 @@ t_complex	addition(t_complex z1, t_complex z2)
 	add.x = z1.x + z2.x;
 	add.y = z1.y + z2.y;
 	return (add);
-}
-
-/**
- * @brief Computes the substraction of two complex numbers.
- * 
- * @param z1 The first complex number.
- * @param z2 The second complex number.
- * 
- * @return The complex number that is the substraction of z1 by z2.
- */
-t_complex	substraction(t_complex z1, t_complex z2)
-{
-	t_complex	sub;
-
-	sub.x = z1.x - z2.x;
-	sub.y = z1.y - z2.y;
-	return (sub);
 }
 
 /**

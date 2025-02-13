@@ -6,28 +6,53 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:55:28 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 19:20:18 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/13 20:31:32 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-void	set_default_range(t_fractal *f)
+/**
+ * @brief Initializes the set and func elements of the
+ * fractal structure. For Julia, tries to get the c
+ * value if two other arguments are given, sets them
+ * to default values otherwise.
+ * 
+ * @param ac Number of arguments.
+ * @param av The array of arguments.
+ * @param f Pointer to the fractal structure.
+ * @param set Character corresponding to the set.
+ * 
+ * @return 1 if the conversion for Julia was successful,
+ * 0 otherwise.
+ */
+int	init_set(int ac, char **av, t_fractal *f, char set)
 {
-	if (f->set == JULIA)
+	if (set == 'J')
 	{
-		f->min.x = -2.0;
-		f->min.y = -2.0;
-		f->max.x = 2.0;
-		f->max.y = 2.0;
+		f->set = JULIA;
+		f->func = julia;
+		if (ac == 2)
+			f->c = (t_complex){-0.745429, 0.05};
+		else
+			return (get_julia_value(av[2], av[3], f));
 	}
-	if (f->set == MANDELBROT)
+	else if (set == 'M')
 	{
-		f->min.x = -2.0;
-		f->min.y = -1.5;
-		f->max.x = 1.0;
-		f->max.y = 1.5;
+		f->set = MANDELBROT;
+		f->func = mandelbrot;
 	}
+	else if (set == 'B')
+	{
+		f->set = BURNING_SHIP;
+		f->func = burning_ship;
+	}
+	else if (set == 'N')
+	{
+		f->set = NEWTON;
+		f->func = newton;
+	}
+	return (1);
 }
 
 /**
@@ -38,14 +63,28 @@ void	set_default_range(t_fractal *f)
  */
 void	init_fractal(t_fractal *f)
 {
-	f->min.x = -2.0;
-	f->min.y = -1.5;
-	f->max.x = 1.0;
-	f->max.y = 1.5;
+	if (f->set == JULIA)
+	{
+		f->min = (t_complex){-1.5, -1.5};
+		f->max = (t_complex){1.5, 1.5};
+	}
+	else if (f->set == MANDELBROT)
+	{
+		f->min = (t_complex){-2.0, -1.5};
+		f->max = (t_complex){1.0, 1.5};
+	}
+	else if (f->set == BURNING_SHIP)
+	{
+		f->min = (t_complex){-2.0, -2.0};
+		f->max = (t_complex){1.5, 0.5};
+	}
+	else if (f->set == NEWTON)
+	{
+		f->min = (t_complex){-2.0, -1.5};
+		f->max = (t_complex){1.0, 1.5};
+	}
 	f->max_iter = 80;
 	f->zoom = 1.0;
-	f->c.x = -0.745429;
-	f->c.y = 0.05;
 }
 
 /**
