@@ -6,11 +6,39 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:55:28 by ego               #+#    #+#             */
-/*   Updated: 2025/02/13 20:31:32 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/14 15:02:30 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/**
+ * @brief Convert the two given strings
+ * to double numbers and assigns them to the
+ * fractal structure. If the converted values
+ * are considered incorrect (either an invalid string
+ * or not interesting values), returns 0.
+ * 
+ * @param cr First string corresponding the real part.
+ * @param ci Second string corresponding to the imaginary part.
+ * @param f Pointer to the fractal structure.
+ * 
+ * @return 1 if the conversion is successful, 0 otherwise.
+ */
+static int	get_julia_values(char *cr, char *ci, t_fractal *f)
+{
+	t_complex	c;
+
+	c.x = ft_atof(cr);
+	c.y = ft_atof(ci);
+	if (ft_abs(c.x) > 1.5 || ft_abs(c.y) > 1.5 || (c.x == 0 && c.y == 0))
+	{
+		put_help_message();
+		return (0);
+	}
+	f->c = c;
+	return (1);
+}
 
 /**
  * @brief Initializes the set and func elements of the
@@ -35,7 +63,7 @@ int	init_set(int ac, char **av, t_fractal *f, char set)
 		if (ac == 2)
 			f->c = (t_complex){-0.745429, 0.05};
 		else
-			return (get_julia_value(av[2], av[3], f));
+			return (get_julia_values(av[2], av[3], f));
 	}
 	else if (set == 'M')
 	{
@@ -75,8 +103,8 @@ void	init_fractal(t_fractal *f)
 	}
 	else if (f->set == BURNING_SHIP)
 	{
-		f->min = (t_complex){-2.0, -2.0};
-		f->max = (t_complex){1.5, 0.5};
+		f->min = (t_complex){-2.0, -1.8};
+		f->max = (t_complex){1.5, 0.7};
 	}
 	else if (f->set == NEWTON)
 	{

@@ -6,38 +6,16 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 17:59:25 by ego               #+#    #+#             */
-/*   Updated: 2025/02/13 20:30:22 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/14 14:51:25 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 /**
- * @brief Tries to convert the two given strings
- * into double numbers and assigns them to the
- * fractal structure.
- * 
- * @param cr First string corresponding the real part.
- * @param ci Second string corresponding to the imaginary part.
- * @param f Pointer to the fractal structure.
- * 
- * @return 1 if the conversion is successful, 0 otherwise.
- */
-int	get_julia_value(char *cr, char *ci, t_fractal *f)
-{
-	t_complex	c;
-
-	cr[0] = 0;
-	ci[0] = 0;
-	c.x = 2;
-	c.y = 2;
-	f->c = c;
-	return (1);
-}
-
-/**
  * @brief Parses the argument and prints the help message in case
- * of wrong argument. Also gets Julia starting values if provided.
+ * of wrong argument. Changes the data structure if the argument
+ * is correct. Also gets Julia starting values if provided.
  * 
  * @param ac Number of arguments.
  * @param av The array of arguments.
@@ -57,17 +35,16 @@ static int	parse_argument(int ac, char **av, t_fractal *f)
 	}
 	if (ac < 2 || ac > 4 || !ft_strcmp("help", av[1]))
 		return (put_help_message());
-	if (!ft_strscmp(J1, J2, J3, av[1]) && (ac == 2 || ac == 4))
+	if (!ft_strscmp(J1, J2, av[1]) && (ac == 2 || ac == 4))
 		return (init_set(ac, av, f, 'J'));
-	else if (!ft_strscmp(M1, M2, M3, av[1]) && ac < 3)
+	else if (!ft_strscmp(M1, M2, av[1]) && ac < 3)
 		return (init_set(ac, av, f, 'M'));
-	else if (!ft_strscmp(B1, B2, B3, av[1]) && ac < 3)
+	else if (!ft_strscmp(B1, B2, av[1]) && ac < 3)
 		return (init_set(ac, av, f, 'B'));
-	else if (!ft_strscmp(N1, N2, N3, av[1]) && ac < 3)
+	else if (!ft_strscmp(N1, N2, av[1]) && ac < 3)
 		return (init_set(ac, av, f, 'N'));
 	else
 		return (put_help_message());
-	printf("%i\n", f->set);
 	return (1);
 }
 
@@ -91,6 +68,7 @@ int	main(int argc, char **argv)
 
 	if (!parse_argument(argc, argv, &fractal))
 		return (1);
+	put_controls_message();
 	init_mlx(&fractal);
 	init_fractal(&fractal);
 	mlx_key_hook(fractal.window, key_hook, &fractal);

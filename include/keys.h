@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:46:58 by ego               #+#    #+#             */
-/*   Updated: 2025/02/13 20:09:42 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/14 14:41:12 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,13 @@
 # define KEY_P 35
 # define KEY_M 46
 
-# define J1 "J"
-# define J2 "Julia"
-# define J3 "julia"
-# define M1 "M"
-# define M2 "Mandelbrot"
-# define M3 "mandelbrot"
-# define B1 "B"
-# define B2 "Burning_ship"
-# define B3 "burning_ship"
-# define N1 "N"
-# define N2 "Newton"
-# define N3 "newton"
+# define J1 "j"
+# define J2 "julia"
+# define M1 "m"
+# define M2 "mandelbrot"
+# define B1 "b"
+# define B2 "burning_ship"
+# define N1 "n"
+# define N2 "newton"
 
 #endif

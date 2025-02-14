@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:45:39 by ego               #+#    #+#             */
-/*   Updated: 2025/02/13 20:32:08 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/14 14:51:03 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <../minilibx/mlx.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include <string.h>
 # include <unistd.h>
 # include "keys.h"
@@ -83,7 +82,8 @@ t_complex	multiplication(t_complex z1, t_complex z2);
 // Utils
 
 int			ft_strcmp(char *s1, char *s2);
-int			ft_strscmp(char *s1, char *s2, char *s3, char *s);
+int			ft_strscmp(char *s1, char *s2, char *s);
+double		ft_atof(char *nptr);
 double		ft_abs(double x);
 void		clean_exit(t_fractal *f, char *msg, int exit_code);
 
@@ -91,5 +91,6 @@ void		clean_exit(t_fractal *f, char *msg, int exit_code);
 
 void		ft_putstr_fd(const char *s, int fd);
 int			put_help_message(void);
+void		put_controls_message(void);
 
 #endif

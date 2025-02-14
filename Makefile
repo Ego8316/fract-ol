@@ -6,7 +6,7 @@
 #    By: ego <ego@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/15 12:42:34 by hcavet            #+#    #+#              #
-#    Updated: 2025/02/13 15:24:15 by ego              ###   ########.fr        #
+#    Updated: 2025/02/14 14:27:16 by ego              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,14 +30,15 @@ MLX		=	libmlx.a
 
 CC		=	gcc
 RM		=	rm -f
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -fopenmp
+LFLAGS  =	-L$(MPATH) -lmlx -lXext -lX11
 NAME	=	fractol
 
 all		:	$(NAME)
 
 $(NAME)	:	$(MLX) $(OBJS) header
 			echo "Linking object files..."
-			$(CC) $(CFLAGS) $(OBJS) -I $(IDIR) -L$(MPATH) -lmlx -lXext -lX11 -lm -o $(NAME)
+			$(CC) $(CFLAGS) $(OBJS) -I $(IDIR) $(LFLAGS) -o $(NAME)
 			echo "$(GREEN)[OK] $(NAME) is ready!$(RESET)"
 
 bonus	:	all
