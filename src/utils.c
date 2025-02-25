@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:55:46 by ego               #+#    #+#             */
-/*   Updated: 2025/02/14 14:41:33 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/25 02:14:18 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,9 @@ void	clean_exit(t_fractal *f, char *msg, int exit_code)
 		mlx_destroy_display(f->mlx);
 		free(f->mlx);
 	}
+	if (f->palette)
+		free_color_palette(f);
+	if (f->map)
+		free_color_map(f);
 	exit(exit_code);
 }

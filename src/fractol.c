@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 17:59:25 by ego               #+#    #+#             */
-/*   Updated: 2025/02/14 14:51:25 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/25 01:22:54 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,14 @@ int	main(int argc, char **argv)
 
 	if (!parse_argument(argc, argv, &fractal))
 		return (1);
-	put_controls_message();
+	if (!init_palette(&fractal) || !init_map(&fractal))
+		clean_exit(&fractal, "malloc: allocation failed\n", 1);
 	init_mlx(&fractal);
 	init_fractal(&fractal);
 	mlx_key_hook(fractal.window, key_hook, &fractal);
 	mlx_mouse_hook(fractal.window, mouse_hook, &fractal);
 	mlx_hook(fractal.window, CLOSE_BUTTON, 0, exit_fractal, &fractal);
+	put_controls_message();
 	render_fractal(&fractal);
 	mlx_loop(fractal.mlx);
 	return (0);

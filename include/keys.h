@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:46:58 by ego               #+#    #+#             */
-/*   Updated: 2025/02/14 14:41:12 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/25 01:44:03 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,17 @@
 # define NUMPAD_PLUS 65451
 # define NUMPAD_MINUS 65453
 # define KEY_SPACE 32
-# define KEY_ONE 49
-# define KEY_TWO 50
-# define KEY_THREE 51
-# define KEY_FOUR 52
-# define KEY_FIVE 53
+# define KEY_ONE 38
+# define KEY_TWO 233
+# define KEY_THREE 34
+# define KEY_FOUR 39
 # define MOUSE_WHEEL_UP 4
 # define MOUSE_WHEEL_DOWN 5
-# define KEY_K 107
 # define KEY_R 114
-# define KEY_C 8
-# define KEY_H 4
-# define KEY_J 38
-# define KEY_P 35
-# define KEY_M 46
+# define KEY_J 106
+# define KEY_M 109
+# define KEY_B 98
+# define KEY_N 110
 
 # define J1 "j"
 # define J2 "julia"

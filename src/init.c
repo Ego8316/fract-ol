@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:55:28 by ego               #+#    #+#             */
-/*   Updated: 2025/02/14 15:02:30 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/25 03:12:25 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,12 @@ static int	get_julia_values(char *cr, char *ci, t_fractal *f)
  */
 int	init_set(int ac, char **av, t_fractal *f, char set)
 {
+	f->c = (t_complex){-0.745429, 0.05};
 	if (set == 'J')
 	{
 		f->set = JULIA;
 		f->func = julia;
-		if (ac == 2)
-			f->c = (t_complex){-0.745429, 0.05};
-		else
+		if (ac > 2)
 			return (get_julia_values(av[2], av[3], f));
 	}
 	else if (set == 'M')
@@ -108,10 +107,10 @@ void	init_fractal(t_fractal *f)
 	}
 	else if (f->set == NEWTON)
 	{
-		f->min = (t_complex){-2.0, -1.5};
-		f->max = (t_complex){1.0, 1.5};
+		f->min = (t_complex){-1.5, -1.5};
+		f->max = (t_complex){1.5, 1.5};
 	}
-	f->max_iter = 80;
+	f->max_iter = 100;
 	f->zoom = 1.0;
 }
 

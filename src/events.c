@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:54:50 by ego               #+#    #+#             */
-/*   Updated: 2025/02/12 19:06:17 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/25 01:45:37 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,40 @@ static void	zoom(t_fractal *f, int x, int y, double ratio)
 }
 
 /**
+ * @brief A helper function to have more keycodes.
+ * 
+ * @param keycode Keycode corresponding to the action.
+ * @param f Pointer to the fractal structure.
+ */
+void	key_switch(int keycode, t_fractal *f)
+{
+	if (keycode == KEY_THREE)
+		f->color_map = f->color_map->prev;
+	if (keycode == KEY_FOUR)
+		f->color_map = f->color_map->next;
+	if (keycode == KEY_J)
+	{
+		f->set = JULIA;
+		f->func = julia;
+	}
+	if (keycode == KEY_M)
+	{
+		f->set = MANDELBROT;
+		f->func = mandelbrot;
+	}
+	if (keycode == KEY_B)
+	{
+		f->set = BURNING_SHIP;
+		f->func = burning_ship;
+	}
+	if (keycode == KEY_N)
+	{
+		f->set = NEWTON;
+		f->func = newton;
+	}
+}
+
+/**
  * @brief Links keycodes to different events.
  * 	- ESC: exits the program cleanly.
  * 	- W: moves the fractal up.
@@ -102,6 +136,14 @@ static void	zoom(t_fractal *f, int x, int y, double ratio)
  * 	- R: resets the fractal view.
  * 	- PLUS: raises the number of max iterations.
  * 	- MINUS: decreases the number of max iterations.
+ * 	- 1: previous color palette.
+ * 	- 2: next color palette.
+ * 	- 3: previous color map.
+ * 	- 4: next color map.
+ * 	- J: changes to Julia.
+ * 	- M: changes to Mandelbrot.
+ * 	- B: changes to Burning Ship.
+ * 	- N: changes to Newton.
  * Rerenders the fractal afterwards.
  * 
  * @param keycode Keycode corresponding to the action.
@@ -127,6 +169,12 @@ int	key_hook(int keycode, t_fractal *f)
 		f->max_iter += 5;
 	if ((keycode == KEY_MINUS || keycode == NUMPAD_MINUS) && f->max_iter > 10)
 		f->max_iter -= 5;
+	if (keycode == KEY_ONE)
+		f->color_palette = f->color_palette->prev;
+	if (keycode == KEY_TWO)
+		f->color_palette = f->color_palette->next;
+	else
+		key_switch(keycode, f);
 	render_fractal(f);
 	return (0);
 }
@@ -148,7 +196,7 @@ int	mouse_hook(int mouse_code, int x, int y, t_fractal *f)
 	if (mouse_code == MOUSE_WHEEL_UP)
 		zoom(f, x, y, 1.2);
 	if (mouse_code == MOUSE_WHEEL_DOWN)
-		zoom(f, x, y, 0.7);
+		zoom(f, x, y, 0.83);
 	render_fractal(f);
 	return (0);
 }

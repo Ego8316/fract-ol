@@ -6,7 +6,7 @@
 /*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 23:10:59 by ego               #+#    #+#             */
-/*   Updated: 2025/02/14 15:00:57 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/25 01:34:59 by ego              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ void	put_controls_message(void)
 	ft_putstr_fd(" - J : select Julia\n", STDOUT_FILENO);
 	ft_putstr_fd(" - B : select Burning Ship\n", STDOUT_FILENO);
 	ft_putstr_fd(" - N : select Newton\n", STDOUT_FILENO);
+	ft_putstr_fd("Color selection:\n", STDOUT_FILENO);
+	ft_putstr_fd(" - 1/2 : previous/next color palette\n", STDOUT_FILENO);
+	ft_putstr_fd(" - 3/4 : previous/next color map\n", STDOUT_FILENO);
 	ft_putstr_fd("Other commands:\n", STDOUT_FILENO);
 	ft_putstr_fd(" - + / - : raise/decrease max iterations\n", STDOUT_FILENO);
 	ft_putstr_fd(" - ESC : exit the program\n", STDOUT_FILENO);

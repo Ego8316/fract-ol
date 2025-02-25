@@ -6,22 +6,24 @@
 #    By: ego <ego@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/15 12:42:34 by hcavet            #+#    #+#              #
-#    Updated: 2025/02/14 14:27:16 by ego              ###   ########.fr        #
+#    Updated: 2025/02/25 01:02:12 by ego              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 IDIR	=	include/
 SDIR	=	src/
 
-SRC		=	fractol.c				\
-			init.c					\
-			utils.c					\
-			events.c				\
-			fractals.c				\
-			complex.c				\
-			display.c				\
-			render.c				\
-			color.c
+SRC		=	fractol.c	\
+			init.c		\
+			utils.c		\
+			events.c	\
+			fractals.c	\
+			complex.c	\
+			display.c	\
+			render.c	\
+			maps.c		\
+			palettes.c	\
+			free.c
 SRCS	=	$(addprefix $(SDIR), $(SRC))
 OBJS	=	$(SRCS:.c=.o)
 
@@ -31,7 +33,7 @@ MLX		=	libmlx.a
 CC		=	gcc
 RM		=	rm -f
 CFLAGS	=	-Wall -Wextra -Werror -fopenmp
-LFLAGS  =	-L$(MPATH) -lmlx -lXext -lX11
+LFLAGS  =	-L$(MPATH) -lmlx -lXext -lX11 -lm
 NAME	=	fractol
 
 all		:	$(NAME)
