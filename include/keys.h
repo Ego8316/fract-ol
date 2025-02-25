@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hcavet <hcavet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:46:58 by ego               #+#    #+#             */
-/*   Updated: 2025/02/25 01:44:03 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/25 16:03:35 by hcavet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@
 # define NUMPAD_PLUS 65451
 # define NUMPAD_MINUS 65453
 # define KEY_SPACE 32
-# define KEY_ONE 38
-# define KEY_TWO 233
-# define KEY_THREE 34
-# define KEY_FOUR 39
+# define KEY_ONE 49
+# define KEY_TWO 50
+# define KEY_THREE 51
+# define KEY_FOUR 52
 # define MOUSE_WHEEL_UP 4
 # define MOUSE_WHEEL_DOWN 5
 # define KEY_R 114

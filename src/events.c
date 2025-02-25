@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ego <ego@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: hcavet <hcavet@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:54:50 by ego               #+#    #+#             */
-/*   Updated: 2025/02/25 01:45:37 by ego              ###   ########.fr       */
+/*   Updated: 2025/02/25 16:44:53 by hcavet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ static void	zoom(t_fractal *f, int x, int y, double ratio)
 void	key_switch(int keycode, t_fractal *f)
 {
 	if (keycode == KEY_THREE)
-		f->color_map = f->color_map->prev;
+		f->map = f->map->prev;
 	if (keycode == KEY_FOUR)
-		f->color_map = f->color_map->next;
+		f->map = f->map->next;
 	if (keycode == KEY_J)
 	{
 		f->set = JULIA;
@@ -170,9 +170,9 @@ int	key_hook(int keycode, t_fractal *f)
 	if ((keycode == KEY_MINUS || keycode == NUMPAD_MINUS) && f->max_iter > 10)
 		f->max_iter -= 5;
 	if (keycode == KEY_ONE)
-		f->color_palette = f->color_palette->prev;
+		f->palette = f->palette->prev;
 	if (keycode == KEY_TWO)
-		f->color_palette = f->color_palette->next;
+		f->palette = f->palette->next;
 	else
 		key_switch(keycode, f);
 	render_fractal(f);
